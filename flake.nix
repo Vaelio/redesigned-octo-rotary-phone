@@ -43,6 +43,7 @@
               echo "[+] Starting the container..."
               sudo docker start "$CTR_NAME"
           fi
+	  sleep 1
           echo "🚀 Exec-ing inside the container..."
           sudo docker exec -e SHELL=/bin/zsh -ti "$CTR_NAME" zsh -i
       '';
