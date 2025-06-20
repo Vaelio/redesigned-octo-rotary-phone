@@ -3,6 +3,7 @@
 
 function setup_omz {
     /share/oh-my-zsh/tools/install.sh
+    mv /workspace/.zshrc.pre-oh-my-zsh /workspace/.zshrc
 }
 
 function finish() {
