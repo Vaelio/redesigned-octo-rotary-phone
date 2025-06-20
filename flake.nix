@@ -7,7 +7,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils];
+      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix];
       ctr-tools = with pkgs.dockerTools; [ usrBinEnv binSh caCertificates fakeNss];
       ad-tools = with pkgs; [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump];
       network-tools = with pkgs; [ nmap proxychains netcat socat simple-http-server ];
@@ -53,7 +53,7 @@
               --mount type=bind,src=/root/.exegol/my-resources,dst=/opt/my-resources \
               --mount type=bind,src=/root/.exegol/exegol-resources,dst=/opt/resources \
               --mount type=bind,src=./workspace,dst=/workspace \
-              ${nix-pentest.imageName} \
+              ghcr.io/vaelio/nix-pentest-ctr:latest \
 	      /bin/bash /bin/entrypoint.sh endless
 	fi
 	if sudo docker ps --filter "name=$CTR_NAME" --filter "status=running" --format '{{.Names}}' | grep -qx "$CTR_NAME"; then
