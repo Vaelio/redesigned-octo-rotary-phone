@@ -9,7 +9,12 @@
       pkgs = nixpkgs.legacyPackages.${system};
       # A wrapper script that mounts ./data and runs the image
       runScript = pkgs.writeShellScriptBin "run-my-container" ''
-        CTR_NAME=formol-$(basename "$PWD")
+        if [ $# -ge 1 ]; then
+            CTR_NAME="formol-$1"
+	else
+	    rand="$(head /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c5)"
+	    CTR_NAME="formol-$rand"
+	fi
 	if sudo docker container inspect "$CTR_NAME" >/dev/null 2>&1; then
             echo "[-] Skipping container creation"
         else
