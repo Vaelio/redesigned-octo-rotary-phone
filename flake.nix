@@ -7,33 +7,9 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix];
-      ctr-tools = with pkgs.dockerTools; [ usrBinEnv binSh caCertificates fakeNss];
-      ad-tools = with pkgs; [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump];
-      network-tools = with pkgs; [ nmap proxychains netcat socat simple-http-server ];
-      pwn-tools = with pkgs; [ gdb gef nasm ropgadget python312Packages.ropper pwntools cutter rocmPackages.llvm.clang ];
-      nix-pentest = pkgs.dockerTools.buildLayeredImage {
-        name = "nix-pentest-ctr";
-        tag = "latest";
-        config = {
-          Cmd = [ "${pkgs.bash}/bin/bash" ]; # Runs bash interactively
-        };
-	contents = with pkgs; [
-	  ./scripts
-	  ctr-tools
-	  linux-tools
-	  ad-tools
-	  network-tools
-	];
-      };
-
       # A wrapper script that mounts ./data and runs the image
       runScript = pkgs.writeShellScriptBin "run-my-container" ''
         CTR_NAME=formol-$(basename "$PWD")
-	if [ ! -d "./workspace" ]; then
-              mkdir ./workspace
-        fi
-        #sudo docker load < ${nix-pentest}
 	if sudo docker container inspect "$CTR_NAME" >/dev/null 2>&1; then
             echo "[-] Skipping container creation"
         else
@@ -71,9 +47,6 @@
         type = "app";
         program = "${runScript}/bin/run-my-container";
       };
-
-      # Optional: buildable Docker image with nix build
-      packages.${system}.default = nix-pentest;
 
       # Optional: nix develop gives access to run script
       devShells.${system}.default = pkgs.mkShell {
