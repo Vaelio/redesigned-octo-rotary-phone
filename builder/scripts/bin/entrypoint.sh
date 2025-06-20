@@ -12,6 +12,8 @@ function finish() {
 
 function endless() {
   # Start action / endless
+  setup_omz
+
   finish
   # Entrypoint for the container, in order to have a process hanging, to keep the container alive
   # Alternative to running bash/zsh/whatever as entrypoint, which is longer to start and to stop and to very clean
