@@ -38,6 +38,6 @@ jobs:
 
       - name: Push to GitHub Container Registry
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/nix-pentest
+          IMAGE_NAME=ghcr.io/vaelio/nix-pentest
           docker push $IMAGE_NAME:latest
 
