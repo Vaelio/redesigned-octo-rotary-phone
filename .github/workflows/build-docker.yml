@@ -1,0 +1,43 @@
+name: Build and Push Docker Image from Nix
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v24
+        with:
+          nix_path: nixpkgs=channel:nixos-25.05
+
+      - name: Build Docker image with Nix
+        run: nix build
+
+      - name: Load Docker image
+        run: docker load < result
+
+      - name: Tag image for GitHub Container Registry
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/my-image
+          docker tag my-image:latest $IMAGE_NAME:latest
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push to GitHub Container Registry
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/my-image
+          docker push $IMAGE_NAME:latest
+
