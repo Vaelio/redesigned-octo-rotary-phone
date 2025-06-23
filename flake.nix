@@ -45,8 +45,9 @@
           else
               echo "[+] Starting the container..."
               sudo docker start "$CTR_NAME"
+              sleep 3
           fi
-	  sleep 3
+	  
           echo "🚀 Exec-ing inside the container..."
           sudo docker exec -w /workspace -e SHELL=/bin/zsh -ti "$CTR_NAME" zsh -i
       '';
