@@ -37,16 +37,13 @@
 	      --mount type=bind,src=./workspace,dst=/workspace \
 	      nix-pentest-ctr \
 	      /bin/bash /bin/entrypoint.sh endless
-              sleep 1
-	      echo "[+] Creating workspace..."
-	      sudo docker exec -ti "$CTR_NAME" mkdir /workspace
 	fi
 	if sudo docker ps --filter "name=$CTR_NAME" --filter "status=running" --format '{{.Names}}' | grep -qx "$CTR_NAME"; then
               echo "[-] Container already started"
           else
               echo "[+] Starting the container..."
               sudo docker start "$CTR_NAME"
-              sleep 2
+              sleep 3
           fi
 	  
           echo "🚀 Exec-ing inside the container..."
