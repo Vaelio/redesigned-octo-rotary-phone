@@ -35,7 +35,7 @@
 	      --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
               --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
 	      --mount type=bind,src=./workspace,dst=/workspace \
-              nix-pentest-ctr:latest \
+	      ghcr.io/vaelio/nix-pentest-ctr:latest \
 	      /bin/bash /bin/entrypoint.sh endless
 	      echo "[+] Creating workspace..."
 	      sudo docker exec -ti "$CTR_NAME" mkdir /workspace
