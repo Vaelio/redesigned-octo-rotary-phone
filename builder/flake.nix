@@ -1,13 +1,28 @@
 {
   description = "Docker image with runtime mounts via nix run";
+  inputs = {
+      nixpkgs.url = "github:NixOS/nixpkgs/25.05";
+      home-manager = {
+        url = "github:nix-community/home-manager/release-25.05";
+	inputs.nixpkgs.follows = "nixpkgs";
+      };
+  };
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/25.05";
-
-  outputs = { self, nixpkgs }: 
+  outputs = { self, nixpkgs, home-manager }: 
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix];
+      pkgs = import nixpkgs { 
+        inherit system;
+	config.allowUnfree = true;
+      };
+      hm = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./home.nix
+        ];
+        extraSpecialArgs = {};
+      };
+      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix home-manager];
       ctr-tools = with pkgs.dockerTools; [ usrBinEnv binSh caCertificates fakeNss];
       ad-tools = with pkgs; [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump];
       network-tools = with pkgs; [ nmap proxychains netcat socat simple-http-server ];
@@ -24,6 +39,8 @@
 	  linux-tools
 	  ad-tools
 	  network-tools
+	  hm.activationPackage
+	  hm
 	];
       };
 
