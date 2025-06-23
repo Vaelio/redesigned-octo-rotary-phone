@@ -23,8 +23,8 @@ jobs:
           nix_path: nixpkgs=channel:nixos-25.05
 
       - name: Build Docker image with Nix
-        working-directory: ./app
-        run: nix build builder/
+        working-directory: ./builder/
+        run: nix build
 
       - name: Load Docker image
         run: docker load < result
