@@ -43,7 +43,7 @@
           else
               echo "[+] Starting the container..."
               sudo docker start "$CTR_NAME"
-              sleep 2
+              sleep 3
           fi
 	  
           echo "🚀 Exec-ing inside the container..."
