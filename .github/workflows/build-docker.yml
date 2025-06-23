@@ -27,6 +27,7 @@ jobs:
         run: nix build
 
       - name: Load Docker image
+        working-directory: ./builder/
         run: docker load < result
 
       - name: Tag image for GitHub Container Registry
