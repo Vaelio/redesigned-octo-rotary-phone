@@ -37,6 +37,7 @@
 	      --mount type=bind,src=./workspace,dst=/workspace \
 	      ghcr.io/vaelio/nix-pentest-ctr:latest \
 	      /bin/bash /bin/entrypoint.sh endless
+              sleep 1
 	      echo "[+] Creating workspace..."
 	      sudo docker exec -ti "$CTR_NAME" mkdir /workspace
 	fi
@@ -45,7 +46,7 @@
           else
               echo "[+] Starting the container..."
               sudo docker start "$CTR_NAME"
-              sleep 3
+              sleep 2
           fi
 	  
           echo "🚀 Exec-ing inside the container..."
