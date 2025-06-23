@@ -40,7 +40,6 @@
 	  ad-tools
 	  network-tools
 	  hm.activationPackage
-	  hm
 	];
       };
 
