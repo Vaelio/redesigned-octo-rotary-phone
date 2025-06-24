@@ -30,24 +30,6 @@ rec {
   # environment.
   home.packages = [
 
-    # GUI
-    (pkgs.wrapFirefox (pkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-    pkgs.librewolf
-
-    # TERM
-    pkgs.bat
-    pkgs.alacritty
-    pkgs.wezterm
-    pkgs.lsd
-    pkgs.kitty
-    pkgs.procs
-    pkgs.simple-http-server
-    pkgs.tokei
-    pkgs.navi
-    pkgs.yazi
-    pkgs.rio
-    pkgs.bottom
-    pkgs.wthrr
 
     # Tools
     (pkgs.burpsuite.override { proEdition = true; })
@@ -104,7 +86,7 @@ rec {
     enable = true;
     oh-my-zsh = {
       enable = true;
-      theme = "GENTOO";
+      theme = "gentoo";
       plugins = [ "docker" "docker-compose" "zsh-syntax-highlighting" "zsh-completions" "zsh-autosuggestions" "tmux" "fzf" "zsh-z" "zsh-nvm" "asdf" ];
     };
   };
