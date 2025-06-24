@@ -2,30 +2,19 @@
   description = "Docker image with runtime mounts via nix run";
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/25.05";
-      home-manager = {
-        url = "github:nix-community/home-manager/release-25.05";
-	inputs.nixpkgs.follows = "nixpkgs";
-      };
       #rustyproxy = {
       #  url = "gitlab:r2367/RustyProxy";
       #};
   };
 
-  outputs = { self, nixpkgs, home-manager}: #, rustyproxy
+  outputs = { self, nixpkgs}: #, rustyproxy
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { 
         inherit system;
 	config.allowUnfree = true;
       };
-      hm = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home.nix
-        ];
-        extraSpecialArgs = {};
-      };
-      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix home-manager];
+      linux-tools = with pkgs; [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su];
       ctr-tools = with pkgs.dockerTools; [ usrBinEnv binSh caCertificates fakeNss];
       ad-tools = with pkgs; [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump];
       network-tools = with pkgs; [ nmap proxychains netcat socat simple-http-server ];
@@ -35,16 +24,17 @@
         tag = "latest";
         config = {
           Cmd = [ "${pkgs.bash}/bin/bash" ]; # Runs bash interactively
+	  User = "root";
+	  WorkingDir = "/workspace";
+	  Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root"];
         };
 	contents = with pkgs; [
 	  ./scripts
-	  #rustyproxy.packages.${system}.rustyproxy
-	  #rustyproxy.packages.${system}.rustyproxy-srv
 	  ctr-tools
 	  linux-tools
 	  ad-tools
 	  network-tools
-	  hm.activationPackage
+	  shadow
 	];
       };
 
