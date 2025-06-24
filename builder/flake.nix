@@ -6,9 +6,9 @@
         url = "github:nix-community/home-manager/release-25.05";
 	inputs.nixpkgs.follows = "nixpkgs";
       };
-      rustyproxy = {
-        url = "gitlab:r2367/RustyProxy";
-      };
+      #rustyproxy = {
+      #  url = "gitlab:r2367/RustyProxy";
+      #};
   };
 
   outputs = { self, nixpkgs, home-manager, rustyproxy }: 
@@ -38,8 +38,8 @@
         };
 	contents = with pkgs; [
 	  ./scripts
-	  rustyproxy.packages.${system}.rustyproxy
-	  rustyproxy.packages.${system}.rustyproxy-srv
+	  #rustyproxy.packages.${system}.rustyproxy
+	  #rustyproxy.packages.${system}.rustyproxy-srv
 	  ctr-tools
 	  linux-tools
 	  ad-tools
