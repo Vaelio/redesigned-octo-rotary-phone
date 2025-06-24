@@ -11,7 +11,7 @@
       #};
   };
 
-  outputs = { self, nixpkgs, home-manager, rustyproxy }: 
+  outputs = { self, nixpkgs, home-manager}: #, rustyproxy
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { 
