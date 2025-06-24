@@ -26,8 +26,10 @@
 	      --network=host \
               --name $CTR_NAME \
               --hostname $CTR_NAME \
-	      -e HOME=/root \
 	      -e SHELL=zsh \
+	      -e USER=root \
+	      -e HOME=/root \
+	      -e NIXPKGS_ALLOW_UNFREE=1 \
 	      -e DISPLAY=:0 \
 	      -e _JAVA_AWT_WM_NONREPARENTING=1 \
 	      -e QT_X11_NO_MITSHM=1 \
@@ -67,7 +69,9 @@
 	      --network=host \
               --name $CTR_NAME \
               --hostname $CTR_NAME \
-	      -e HOME=/root \
+              -e USER=root \
+              -e HOME=/root \
+              -e NIXPKGS_ALLOW_UNFREE=1 \
 	      -e SHELL=zsh \
 	      -e DISPLAY=:0 \
 	      -e _JAVA_AWT_WM_NONREPARENTING=1 \
