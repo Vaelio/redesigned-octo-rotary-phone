@@ -56,7 +56,7 @@ rec {
   };
 
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "vim";
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#626262";
     #ZSH_HIGHLIGHT_STYLES\[comment\] = "fg=#888888";
     TERM = "xterm-256color";
@@ -64,13 +64,13 @@ rec {
     HISTSIZE=1000000000;
     ZSH_THEME="gentoo";
     HISTTIMEFORMAT="[%F %T] ";
-    TIME_="%{$fg[white]%}[%{$fg[red]%}%D{%b %d, %Y - %T (%Z)}%{$fg[white]%}]%{$reset_color%}";
-    PROMPT="$LOGGING$TIME_%{$FX[bold]$FG[013]%} $EXEGOL_HOSTNAME %{$fg_bold[blue]%}%(!.%1~.%c) $(prompt_char)%{$reset_color%} ";
+    #TIME_="%{$fg[white]%}[%{$fg[red]%}%D{%b %d, %Y - %T (%Z)}%{$fg[white]%}]%{$reset_color%}";
+    #PROMPT="$LOGGING$TIME_%{$FX[bold]$FG[013]%} $EXEGOL_HOSTNAME %{$fg_bold[blue]%}%(!.%1~.%c) $(prompt_char)%{$reset_color%} ";
+    SHELL="zsh";
   };
 
   # setup aliases
   home.shellAliases = {
-    vim="nvim";
     ls="lsd";
   };
 
