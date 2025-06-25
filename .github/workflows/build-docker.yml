@@ -34,24 +34,20 @@ jobs:
         run: |
           docker run --name nix-pentest nix-pentest-ctr /bin/bash /entrypoint.sh setup_channels
 
-      - name: Export the image
+      - name: Commit the image
         run: |
-          docker export nix-pentest > latest.tar
-
-      - name: Reimport the image
-        run: |
-          docker load < latest.tar
+          docker commit nix-pentest nix-pentest-ctr
         
       - name: Tag image for GitHub Container Registry
         run: |
-          IMAGE_NAME=ghcr.io/vaelio/nix-pentest
-          docker tag nix-pentest:latest $IMAGE_NAME:latest
+          IMAGE_NAME=ghcr.io/vaelio/nix-pentest-ctr
+          docker tag nix-pentest-ctr:latest $IMAGE_NAME:latest
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push to GitHub Container Registry
         run: |
-          IMAGE_NAME=ghcr.io/vaelio/nix-pentest
+          IMAGE_NAME=ghcr.io/vaelio/nix-pentest-ctr
           docker push $IMAGE_NAME:latest
 
