@@ -64,7 +64,7 @@ rec {
     HISTSIZE=1000000000;
     ZSH_THEME="gentoo";
     HISTTIMEFORMAT="[%F %T] ";
-    PATH = "~/.nix-profile/bin:$PATH";
+    PATH = "$HOME/.nix-profile/bin:$PATH";
     #TIME_="%{$fg[white]%}[%{$fg[red]%}%D{%b %d, %Y - %T (%Z)}%{$fg[white]%}]%{$reset_color%}";
     #PROMPT="$LOGGING$TIME_%{$FX[bold]$FG[013]%} $EXEGOL_HOSTNAME %{$fg_bold[blue]%}%(!.%1~.%c) $(prompt_char)%{$reset_color%} ";
     SHELL="zsh";
