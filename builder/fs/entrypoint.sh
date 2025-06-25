@@ -6,8 +6,6 @@ function setup_channels {
     for i in $(seq 1 32); do
        echo "nixbld$i:x:$((30000 + $i)):30000::/var/empty:/bin/nologin" >> /etc/passwd
     done
-    mkdir /root/.config/home-manager -p
-    curl -o /root/.config/home-manager/home.nix https://raw.githubusercontent.com/Vaelio/redesigned-octo-rotary-phone/refs/heads/main/builder/home.nix
     nix-channel --add "https://nixos.org/channels/nixpkgs-unstable" nixpkgs
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
     nix-channel --update

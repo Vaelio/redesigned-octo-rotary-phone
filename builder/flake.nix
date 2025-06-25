@@ -30,8 +30,7 @@
 	  Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root"];
         };
 	contents = with pkgs; [
-	  ./root
-	  ./scripts
+	  ./fs
 	  android
 	  ctr-tools
 	  linux-tools

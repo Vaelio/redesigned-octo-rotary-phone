@@ -40,7 +40,7 @@
               --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
 	      --mount type=bind,src=./workspace,dst=/workspace \
 	      nix-pentest-ctr \
-	      /bin/bash /bin/entrypoint.sh endless
+	      /bin/bash /entrypoint.sh endless
 	fi
 	if sudo docker ps --filter "name=$CTR_NAME" --filter "status=running" --format '{{.Names}}' | grep -qx "$CTR_NAME"; then
               echo "[-] Container already started"
@@ -85,7 +85,7 @@
               --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
 	      --mount type=bind,src=./workspace,dst=/workspace \
 	      ghcr.io/vaelio/nix-pentest-ctr:latest \
-	      /bin/bash /bin/entrypoint.sh endless
+	      /bin/bash /entrypoint.sh endless
 	fi
 	if sudo docker ps --filter "name=$CTR_NAME" --filter "status=running" --format '{{.Names}}' | grep -qx "$CTR_NAME"; then
               echo "[-] Container already started"
