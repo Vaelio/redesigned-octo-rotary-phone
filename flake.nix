@@ -26,6 +26,8 @@
 	      --network=host \
               --name $CTR_NAME \
               --hostname $CTR_NAME \
+	      --privileged \
+	      --cap-add=SYS_ADMIN \
 	      -e SHELL=zsh \
 	      -e USER=root \
 	      -e HOME=/root \
@@ -69,6 +71,8 @@
 	      --network=host \
               --name $CTR_NAME \
               --hostname $CTR_NAME \
+	      --privileged \
+	      --cap-add=SYS_ADMIN \
               -e USER=root \
               -e HOME=/root \
               -e NIXPKGS_ALLOW_UNFREE=1 \
