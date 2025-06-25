@@ -38,8 +38,10 @@
 	  network-tools
 	  shadow
 	];
+	extraCommands = ''
+	  mkdir -p ./tmp
+	'';
       };
-
     in {
 
       packages.${system}.default = nix-pentest;
