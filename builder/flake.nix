@@ -27,7 +27,7 @@
           Cmd = [ "${pkgs.bash}/bin/bash" ]; # Runs bash interactively
 	  User = "root";
 	  WorkingDir = "/workspace";
-	  Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root"];
+	  Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root" "NIXPKGS_ALLOW_UNFREE=1"];
         };
 	contents = with pkgs; [
 	  ./fs
