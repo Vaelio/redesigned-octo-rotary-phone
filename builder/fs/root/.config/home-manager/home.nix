@@ -6,7 +6,7 @@ rec {
   home.username = "root";
   home.homeDirectory = "/root";
 
-  imports = [ 
+  imports = [
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -30,17 +30,8 @@ rec {
   # environment.
   home.packages = [
 
-
     # Tools
     (pkgs.burpsuite.override { proEdition = true; })
-
-    # fonts
-
-    # rust
-    
-    # keyboard stuff
-
-    # nix stuff
 
     # python
     pkgs.python3
@@ -57,16 +48,9 @@ rec {
 
   home.sessionVariables = {
     EDITOR = "vim";
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=#626262";
-    #ZSH_HIGHLIGHT_STYLES\[comment\] = "fg=#888888";
     TERM = "xterm-256color";
-    HISTFILESIZE=1000000000;
-    HISTSIZE=1000000000;
     ZSH_THEME="gentoo";
-    HISTTIMEFORMAT="[%F %T] ";
     PATH = "$HOME/.nix-profile/bin:$PATH";
-    #TIME_="%{$fg[white]%}[%{$fg[red]%}%D{%b %d, %Y - %T (%Z)}%{$fg[white]%}]%{$reset_color%}";
-    #PROMPT="$LOGGING$TIME_%{$FX[bold]$FG[013]%} $EXEGOL_HOSTNAME %{$fg_bold[blue]%}%(!.%1~.%c) $(prompt_char)%{$reset_color%} ";
     SHELL="zsh";
   };
 
@@ -80,15 +64,44 @@ rec {
 
   # Enable bash and starship prompt
   programs.bash.enable = true;
-  programs.starship.enable = true;
-  programs.nushell.enable = true;
-  programs.starship.enableNushellIntegration = true;
   programs.zsh = {
     enable = true;
+    envExtra = ''
+      prompt_char () {
+	if [ $UID -eq 0 ]
+	then
+		echo "#"
+	else
+		echo $
+	fi
+      }
+    '';
+    initContent = lib.mkOrder 1500 ''
+      export PROMPT="$LOGGING$TIME_%{$FX[bold]$FG[013]%} $HOSTNAME %{$fg_bold[blue]%}%(!.%1~.%c) $(prompt_char)%{$reset_color%} "
+      export HISTTIMEFORMAT="[%F %T] "
+      export TIME_="%{$fg[white]%}[%{$fg[red]%}%D{%b %d, %Y - %T (%Z)}%{$fg[white]%}]%{$reset_color%}"
+    '';
+    history = {
+      size = 100000000;
+      save = 100000000;
+      extended = true;
+      append = true;
+      findNoDups = true;
+    };
+    autosuggestion = {
+      enable = true;
+      highlight = "fg=#626262";
+    };
+    syntaxHighlighting = {
+      enable = true;
+      styles = {
+        comment = "fg=#888888";
+      };
+    };
     oh-my-zsh = {
       enable = true;
       theme = "gentoo";
-      plugins = [ "docker" "docker-compose" "zsh-syntax-highlighting" "zsh-completions" "zsh-autosuggestions" "tmux" "fzf" "zsh-z" "zsh-nvm" "asdf" ];
+      plugins = [ "docker" "docker-compose" "tmux" "fzf" "asdf" ];
     };
   };
 
