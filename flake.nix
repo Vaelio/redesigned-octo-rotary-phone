@@ -51,7 +51,7 @@
           fi
 	  
           echo "🚀 Exec-ing inside the container..."
-          sudo docker exec -w /workspace -e SHELL=/bin/zsh -ti "$CTR_NAME" zsh -c 'source linux-tools/.zshrc; zsh -i'
+          sudo docker exec -w /workspace -e SHELL=/bin/zsh -ti "$CTR_NAME" zsh -c 'source /root/.zshrc; zsh -i'
       '';
       runScript = pkgs.writeShellScriptBin "run-my-container" ''
         if [ $# -ge 1 ]; then
@@ -96,7 +96,7 @@
           fi
 	  
           echo "🚀 Exec-ing inside the container..."
-          sudo docker exec -w /workspace -e SHELL=/bin/zsh -ti "$CTR_NAME" zsh -c 'source linux-tools/.zshrc; zsh -i'
+          sudo docker exec -w /workspace -e SHELL=/bin/zsh -ti "$CTR_NAME" zsh -c 'source /root/.zshrc; zsh -i'
       '';
     in {
       # The default app: nix run . → launches container with mount
