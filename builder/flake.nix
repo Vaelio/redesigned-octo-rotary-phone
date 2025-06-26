@@ -13,7 +13,7 @@
       };
       linux-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "linux-tools";
-	paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython ];
+	paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython unixtools.script];
       })];
       android = with pkgs; [ (pkgs.symlinkJoin {
         name = "android";
@@ -29,7 +29,7 @@
       })];
       network-tools = with pkgs; [ (pkgs.symlinkJoin { 
         name = "network-tools";
-	paths = [ nmap proxychains-ng netcat socat simple-http-server wireshark];
+	paths = [ nmap proxychains-ng netcat socat simple-http-server wireshark openssh];
       })];
       pwn-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "pwn-tools";
