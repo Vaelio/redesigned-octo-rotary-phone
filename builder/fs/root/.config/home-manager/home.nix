@@ -37,6 +37,14 @@ rec {
     pkgs.python3
     pkgs.python312Packages.ipython
 
+    # fonts
+    pkgs.noto-fonts
+    pkgs.noto-fonts-emoji
+    pkgs.nerd-fonts.noto
+    pkgs.nerd-fonts.caskaydia-cove
+    pkgs.roboto
+    pkgs.font-awesome
+
   ];
 
 
@@ -58,6 +66,9 @@ rec {
   home.shellAliases = {
     ls="lsd";
   };
+
+  # Fonts
+  fonts.fontconfig.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
