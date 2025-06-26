@@ -19,7 +19,7 @@ function finish() {
 
 function endless() {
   # Start action / endless
-  setup_channels
+  # setup_channels
 
   finish
   # Entrypoint for the container, in order to have a process hanging, to keep the container alive
