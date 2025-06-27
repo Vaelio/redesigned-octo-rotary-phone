@@ -13,7 +13,11 @@
       };
       linux-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "linux-tools";
-	paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython unixtools.script];
+	paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython unixtools.script less ];
+      })];
+      web-tools = with pkgs; [ (pkgs.symlinkJoin {
+        name = "web-tools";
+	paths = [ feroxbuster seclists ];
       })];
       android = with pkgs; [ (pkgs.symlinkJoin {
         name = "android";
@@ -51,6 +55,7 @@
 	  linux-tools
 	  ad-tools
 	  network-tools
+	  web-tools
 	  shadow
 	];
 	maxLayers = 10;
