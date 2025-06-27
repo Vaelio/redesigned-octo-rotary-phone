@@ -2,6 +2,7 @@
   description = "Docker image with runtime mounts via nix run";
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/25.05";
+      ffuf.url = "github:vaelio/ffuf-flake";
   };
 
   outputs = { self, nixpkgs, ffuf}:
@@ -11,7 +12,7 @@
         inherit system;
 	config.allowUnfree = true;
       };
-      ffufpkg = pkgs.callPackage ./ffuf { };
+      ffufpkg = ffuf.packages.${system}.ffuf;
       linux-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "linux-tools";
 	paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython unixtools.script less ];
