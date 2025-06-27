@@ -5,14 +5,18 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "path": "./ffuf",
-        "type": "path"
+        "lastModified": 1751023721,
+        "narHash": "sha256-c3hDpvvLLank1r4MuMEe1Kth7juvSgO9jVSManbLEKA=",
+        "owner": "vaelio",
+        "repo": "ffuf-flake",
+        "rev": "2fb97315bf434fbde8a2f49895fecd487c3b410d",
+        "type": "github"
       },
       "original": {
-        "path": "./ffuf",
-        "type": "path"
-      },
-      "parent": []
+        "owner": "vaelio",
+        "repo": "ffuf-flake",
+        "type": "github"
+      }
     },
     "nixpkgs": {
       "locked": {
