@@ -29,6 +29,34 @@ function endless() {
 }
 
 
+# Function to handle termination signals
+cleanup() {
+   # Shutting down the container.
+   # Sending SIGTERM to all interactive process for proper closing
+   pgrep vnc && desktop-stop  # Stop webui desktop if started TODO improve desktop shutdown
+   # shellcheck disable=SC2046
+   kill $(pgrep -f -- openvpn | grep -vE '^1$') 2>/dev/null
+   # shellcheck disable=SC2046
+   kill $(pgrep -x -f -- zsh) 2>/dev/null
+   # shellcheck disable=SC2046
+   kill $(pgrep -x -f -- -zsh) 2>/dev/null
+   # shellcheck disable=SC2046
+   kill $(pgrep -x -f -- bash) 2>/dev/null
+   # shellcheck disable=SC2046
+   kill $(pgrep -x -f -- -bash) 2>/dev/null
+   # Wait for every active process to exit (e.g: shell logging compression, VPN closing, WebUI)
+   WAIT_LIST="$(pgrep -f "(.log|spawn.sh|vnc)" | grep -vE '^1$')"
+   for i in $WAIT_LIST; do
+     # Waiting for: $i PID process to exit
+     tail --pid="$i" -f /dev/null
+   done
+   exit 0
+}
+
+# Trap signals
+trap cleanup SIGTERM SIGINT
+
+
 ### Argument parsing
 
 # Par each parameter
