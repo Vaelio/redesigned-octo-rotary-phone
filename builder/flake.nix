@@ -2,24 +2,22 @@
   description = "Docker image with runtime mounts via nix run";
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/25.05";
-      ffuf.url = "github:vaelio/ffuf-flake";
   };
 
-  outputs = { self, nixpkgs, ffuf}:
+  outputs = { self, nixpkgs}:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { 
         inherit system;
 	config.allowUnfree = true;
       };
-      ffufpkg = ffuf.packages.${system}.ffuf;
       linux-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "linux-tools";
 	paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython unixtools.script less ];
       })];
       web-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "web-tools";
-	paths = [ feroxbuster seclists ffufpkg];
+	paths = [ feroxbuster seclists ffuf];
       })];
       android = with pkgs; [ (pkgs.symlinkJoin {
         name = "android";
