@@ -29,7 +29,10 @@ jobs:
       - name: Load Docker image
         working-directory: ./builder/
         run: docker load < result
-        
+
+      - name: Cleanup phase
+        run: nix-collect-garbage -d
+      
       - name: Run to install home-manager
         run: |
           docker run --name nix-pentest nix-pentest-ctr /bin/bash /entrypoint.sh setup_channels
