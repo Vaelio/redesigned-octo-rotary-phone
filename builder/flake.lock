@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "manspider": {
+    "manspiderPkg": {
       "inputs": {
         "nixpkgs": "nixpkgs",
         "pyproject-nix": "pyproject-nix"
@@ -54,7 +54,7 @@
     "pyproject-nix": {
       "inputs": {
         "nixpkgs": [
-          "manspider",
+          "manspiderPkg",
           "nixpkgs"
         ]
       },
@@ -74,7 +74,7 @@
     },
     "root": {
       "inputs": {
-        "manspider": "manspider",
+        "manspiderPkg": "manspiderPkg",
         "nixpkgs": "nixpkgs_2"
       }
     }

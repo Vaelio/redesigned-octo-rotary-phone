@@ -2,12 +2,13 @@
   description = "Docker image with runtime mounts via nix run";
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/25.05";
-      manspider.url = "github:vaelio/manspider-flake";
+      manspiderPkg.url = "github:vaelio/manspider-flake";
   };
 
-  outputs = { self, nixpkgs, manspider}:
+  outputs = { self, nixpkgs, manspiderPkg}:
     let
       system = "x86_64-linux";
+      manspider = manspiderPkg.packages.${system}.default;
       pkgs = import nixpkgs { 
         inherit system;
 	config.allowUnfree = true;
