@@ -1,6 +1,41 @@
 {
   "nodes": {
+    "manspider": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "pyproject-nix": "pyproject-nix"
+      },
+      "locked": {
+        "lastModified": 1751385504,
+        "narHash": "sha256-Y8X9+u8BDuJp60pnVY1Rla6DVaz6N9QHzHpVQY0RV8A=",
+        "owner": "vaelio",
+        "repo": "manspider-flake",
+        "rev": "76b26119a3d90e5d0fb23d29832a8344bef9c43b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vaelio",
+        "repo": "manspider-flake",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1751271578,
+        "narHash": "sha256-P/SQmKDu06x8yv7i0s8bvnnuJYkxVGBWLWHaU+tt4YY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3016b4b15d13f3089db8a41ef937b13a9e33a8df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1748026580,
         "narHash": "sha256-rWtXrcIzU5wm/C8F9LWvUfBGu5U5E7cFzPYT1pHIJaQ=",
@@ -16,9 +51,31 @@
         "type": "github"
       }
     },
+    "pyproject-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "manspider",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1750499893,
+        "narHash": "sha256-ThKBd8XSvITAh2JqU7enOp8AfKeQgf9u7zYC41cnBE4=",
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "rev": "e824458bd917b44bf4c38795dea2650336b2f55d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "manspider": "manspider",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

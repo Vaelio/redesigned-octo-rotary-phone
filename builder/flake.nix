@@ -2,9 +2,10 @@
   description = "Docker image with runtime mounts via nix run";
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/25.05";
+      manspider.url = "github:vaelio/manspider-flake";
   };
 
-  outputs = { self, nixpkgs}:
+  outputs = { self, nixpkgs, manspider}:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { 
@@ -29,7 +30,7 @@
       })];
       ad-tools = with pkgs; [ (pkgs.symlinkJoin {
         name = "ad-tools";
-	paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep ];
+	paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider];
       })];
       network-tools = with pkgs; [ (pkgs.symlinkJoin { 
         name = "network-tools";
