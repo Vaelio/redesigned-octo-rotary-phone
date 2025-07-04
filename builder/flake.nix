@@ -3,12 +3,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/25.05";
     manspiderPkg.url = "github:vaelio/manspider-flake";
+    asrepcatcherPkg.url = "github:vaelio/ASRepCatcher-flake";
   };
 
-  outputs = { self, nixpkgs, manspiderPkg }:
+  outputs = { self, nixpkgs, manspiderPkg, asrepcatcherPkg }:
     let
       system = "x86_64-linux";
       manspider = manspiderPkg.packages.${system}.default;
+      asrepcatcher = asrepcatcherPkg.packages.${system}.default;
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -48,7 +50,7 @@
       ad-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "ad-tools";
-          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider ];
+          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher];
         })
       ];
       network-tools = with pkgs; [
