@@ -16,7 +16,13 @@
         config.allowUnfree = true;
       };
       useExtra = builtins.getEnv "IMPORT_FMD" == "1";
-
+      #kaliImage = pkgs.dockerTools.pullImage {
+      #  imageName = "kalilinux/kali-rolling";
+      #  imageDigest = "sha256:c21cb4b884932cf7dcc732efb20b88ea650475591c55c17d51af4bcd45859b18";
+      #  finalImageName = "kali";
+      #  finalImageTag = "latest";
+      #  hash = "sha256-2u7LK434S/INRe5zApAkHmQTKqcxYZkVXTEGGonzmo4=";
+      #};
       extraLayer = with pkgs; [
         (pkgs.symlinkJoin {
           name = "extra-layer";
@@ -32,7 +38,7 @@
       web-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "web-tools";
-          paths = [ feroxbuster seclists ffuf ];
+          paths = [ feroxbuster seclists ffuf sslscan nuclei soapui sqlmap subfinder testssl wafw00f waybackurls wfuzz whatweb whois wpscan];
         })
       ];
       android = with pkgs; [
@@ -50,13 +56,13 @@
       ad-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "ad-tools";
-          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher];
+          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp];
         })
       ];
       network-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "network-tools";
-          paths = [ nmap proxychains-ng netcat socat simple-http-server wireshark openssh ];
+          paths = [ nmap proxychains-ng netcat socat simple-http-server wireshark openssh proxmark3 rdesktop rsync tcpdump tshark traceroute wifite2 ];
         })
       ];
       pwn-tools = with pkgs; [
@@ -68,6 +74,9 @@
       nix-pentest = pkgs.dockerTools.buildLayeredImage {
         name = "nix-pentest-ctr";
         tag = "latest";
+	#fromImage = kaliImage;
+	#fromImageName = null;
+	#fromImageTag = "latest";
         config = {
           Cmd = [ "${pkgs.bash}/bin/bash" ]; # Runs bash interactively
           User = "root";
@@ -86,6 +95,7 @@
           extraLayer
         ];
         maxLayers = 10;
+	      created = "now";
         extraCommands = ''
           	        mkdir -p ./tmp
           	      '';
