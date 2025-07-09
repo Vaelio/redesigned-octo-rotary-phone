@@ -46,7 +46,7 @@
       android = with pkgs; [
         (pkgs.symlinkJoin {
           name = "android";
-          paths = [ android-tools ];
+          paths = [ android-tools anew apksigner apktool frida-tools];
         })
       ];
       ctr-tools = with pkgs.dockerTools; [
