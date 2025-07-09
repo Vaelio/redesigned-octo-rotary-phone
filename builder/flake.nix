@@ -4,9 +4,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/25.05";
     manspiderPkg.url = "github:vaelio/manspider-flake";
     asrepcatcherPkg.url = "github:vaelio/ASRepCatcher-flake";
+    pylapsPkg.url = "github:vaelio/pylaps-flake";
   };
 
-  outputs = { self, nixpkgs, manspiderPkg, asrepcatcherPkg }:
+  outputs = { self, nixpkgs, manspiderPkg, asrepcatcherPkg, pylapsPkg }:
     let
       system = "x86_64-linux";
       manspider = manspiderPkg.packages.${system}.default;
@@ -56,7 +57,7 @@
       ad-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "ad-tools";
-          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp smbmap enum4linux enum4linux-ng];
+          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp smbmap enum4linux enum4linux-ng pylapsPkg];
         })
       ];
       network-tools = with pkgs; [
