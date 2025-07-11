@@ -42,7 +42,7 @@
             nix-pentest-ctr \
             /bin/bash /entrypoint.sh endless
           echo "[+] Copying javaprefs for burp"
-          sudo docker cp $HOME/.java/.userPrefs/burp/ $CTR_NAME:/root/.java/.userPrefs/burp/
+          sudo docker cp /root/.java/.userPrefs/burp/ $CTR_NAME:/root/.java/.userPrefs/burp/
         fi
         if sudo docker ps --filter "name=$CTR_NAME" --filter "status=running" --format '{{.Names}}' | grep -qx "$CTR_NAME"; then
           echo "[-] Container already started"
@@ -88,7 +88,7 @@
             ghcr.io/vaelio/nix-pentest-ctr:latest \
             /bin/bash /entrypoint.sh endless
           echo "[+] Copying javaprefs for burp"
-          sudo docker cp $HOME/.java/.userPrefs/burp/ $CTR_NAME:/root/.java/.userPrefs/burp/
+          sudo docker cp /root/.java/.userPrefs/burp/ $CTR_NAME:/root/.java/.userPrefs/burp/
         fi
         if sudo docker ps --filter "name=$CTR_NAME" --filter "status=running" --format '{{.Names}}' | grep -qx "$CTR_NAME"; then
           echo "[-] Container already started"
