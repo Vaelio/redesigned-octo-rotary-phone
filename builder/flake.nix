@@ -34,19 +34,19 @@
       linux-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "linux-tools";
-          paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils gash-utils procps nix cacert su python312Packages.ipython unixtools.script less iproute2 unixtools.netstat bottom htop gnugrep ];
+          paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils procps nix cacert su python312Packages.ipython unixtools.script less iproute2 unixtools.netstat bottom htop gnugrep ];
         })
       ];
       web-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "web-tools";
-          paths = [ feroxbuster seclists ffuf sslscan nuclei soapui sqlmap subfinder testssl wafw00f waybackurls wfuzz whatweb whois wpscan];
+          paths = [ feroxbuster seclists ffuf sslscan nuclei soapui sqlmap subfinder testssl wafw00f waybackurls wfuzz whatweb whois wpscan ];
         })
       ];
       android = with pkgs; [
         (pkgs.symlinkJoin {
           name = "android";
-          paths = [ android-tools anew apksigner apktool frida-tools];
+          paths = [ android-tools anew apksigner apktool frida-tools ];
         })
       ];
       ctr-tools = with pkgs.dockerTools; [
@@ -58,7 +58,7 @@
       ad-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "ad-tools";
-          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp smbmap enum4linux enum4linux-ng pylaps];
+          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python313Packages.certipy ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp smbmap enum4linux enum4linux-ng pylaps ];
         })
       ];
       network-tools = with pkgs; [
@@ -76,9 +76,9 @@
       nix-pentest = pkgs.dockerTools.buildLayeredImage {
         name = "nix-pentest-ctr";
         tag = "latest";
-	#fromImage = kaliImage;
-	#fromImageName = null;
-	#fromImageTag = "latest";
+        #fromImage = kaliImage;
+        #fromImageName = null;
+        #fromImageTag = "latest";
         config = {
           Cmd = [ "${pkgs.bash}/bin/bash" ]; # Runs bash interactively
           User = "root";
@@ -97,7 +97,7 @@
           extraLayer
         ];
         maxLayers = 10;
-	      created = "now";
+        created = "now";
         extraCommands = ''
           	        mkdir -p ./tmp
           	      '';
