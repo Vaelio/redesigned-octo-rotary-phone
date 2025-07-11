@@ -68,13 +68,7 @@ jobs:
       - name: Build Docker image with Nix
         working-directory: ./builder/
         run: nix build
-
-      - name: Optimize
-        run: nix-store --optimize
-        
-      - name: Cleanup phase
-        run: nix-collect-garbage -d
-        
+       
       - name: Load Docker image
         working-directory: ./builder/
         run: docker load < result
