@@ -32,9 +32,6 @@ jobs:
       - name: Load Docker image
         working-directory: ./builder/
         run: docker load < result
-
-      - name: Cleanup phase
-        run: nix-collect-garbage -d
       
       - name: Run to install home-manager
         run: |
