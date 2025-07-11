@@ -2,6 +2,8 @@
 # SIGTERM received (the container is stopping, every process must be gracefully stopped before the timeout).
 
 function setup_channels {
+    echo 'root:x:0:0:root user:/root:/bin/sh' > /etc/passwd
+    echo 'nobody:x:65534:65534:nobody:/var/empty:/bin/sh' >> /etc/passwd
     echo 'nixbld:x:30000:nixbld1,nixbld10,nixbld11,nixbld12,nixbld13,nixbld14,nixbld15,nixbld16,nixbld17,nixbld18,nixbld19,nixbld2,nixbld20,nixbld21,nixbld22,nixbld23,nixbld24,nixbld25,nixbld26,nixbld27,nixbld28,nixbld29,nixbld3,nixbld30,nixbld31,nixbld32,nixbld4,nixbld5,nixbld6,nixbld7,nixbld8,nixbld9' >> /etc/group
     echo 'nogroup:x:65534:' >> /etc/group
     for i in $(seq 1 32); do
@@ -11,6 +13,9 @@ function setup_channels {
     nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
     nix-channel --update
     nix-shell '<home-manager>' -A install
+
+    # create the userPrefs directory for burp
+    mkdir -p /root/.java/.userPrefs/
     
     
 }
