@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Checking disk space
+        run: |
+          df -h
+          du -h /workspaces/
+        
       - name: Install Nix
         uses: cachix/install-nix-action@v24
         with:
