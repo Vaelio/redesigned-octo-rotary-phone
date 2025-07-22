@@ -44,7 +44,7 @@
         })
       ];
       generic-tools = with pkgs; [
-        (pkgs.symlinjJoin {
+        (pkgs.symlinkJoin {
           name = "generic-tools";
           paths = [ exiftool dex2jar fcrackzip gron hashcat hexedit john ligolo-ng pdfcrack ];
         })
