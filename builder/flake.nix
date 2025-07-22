@@ -67,10 +67,10 @@
           paths = [ usrBinEnv binSh caCertificates fakeNss ];
         })
       ];
-      code-tools = with pkgs.dockerTools; [
+      code-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "code-tools";
-          paths = [ python312Packages.semgrep gitleaks trufflehog ];
+          paths = [ semgrep gitleaks trufflehog ];
         })
       ];
       ad-tools = with pkgs; [
