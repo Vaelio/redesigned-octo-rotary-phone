@@ -17,7 +17,6 @@
         inherit system;
         config.allowUnfree = true;
       };
-      useExtra = builtins.getEnv "IMPORT_FMD" == "1";
       #kaliImage = pkgs.dockerTools.pullImage {
       #  imageName = "kalilinux/kali-rolling";
       #  imageDigest = "sha256:c21cb4b884932cf7dcc732efb20b88ea650475591c55c17d51af4bcd45859b18";
@@ -25,6 +24,7 @@
       #  finalImageTag = "latest";
       #  hash = "sha256-2u7LK434S/INRe5zApAkHmQTKqcxYZkVXTEGGonzmo4=";
       #};
+      useExtra = builtins.getEnv "IMPORT_FMD" == "1";
       extraLayer = with pkgs; [
         (pkgs.symlinkJoin {
           name = "extra-layer";
@@ -70,7 +70,7 @@
       code-tools = with pkgs.dockerTools; [
         (pkgs.symlinkJoin {
           name = "code-tools";
-          paths = [ semgrep gitleaks trufflehog ];
+          paths = [ python312Packages.semgrep gitleaks trufflehog ];
         })
       ];
       ad-tools = with pkgs; [
