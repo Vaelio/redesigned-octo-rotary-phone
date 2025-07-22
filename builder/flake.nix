@@ -40,7 +40,7 @@
       web-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "web-tools";
-          paths = [ feroxbuster seclists ffuf sslscan nuclei soapui sqlmap subfinder testssl wafw00f waybackurls wfuzz whatweb whois wpscan arjun assetfinder dirb dirsearch dnsenum dnsx gau gobuster hakrawler hping httprobe httpx joomscan jwt-cli katana ngrok scout testssl ];
+          paths = [ feroxbuster seclists ffuf sslscan nuclei soapui sqlmap subfinder testssl wafw00f waybackurls wfuzz whatweb whois wpscan arjun assetfinder dirb python312Packages.dirsearch dnsenum dnsx gau gobuster hakrawler hping httprobe httpx joomscan jwt-cli katana ngrok scout testssl ];
         })
       ];
       generic-tools = with pkgs; [
