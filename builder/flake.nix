@@ -1,7 +1,7 @@
 {
   description = "Docker image with runtime mounts via nix run";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/unstable";
     manspiderPkg.url = "github:vaelio/manspider-flake";
     asrepcatcherPkg.url = "github:vaelio/ASRepCatcher-flake";
     pylapsPkg.url = "github:vaelio/pylaps-flake";
