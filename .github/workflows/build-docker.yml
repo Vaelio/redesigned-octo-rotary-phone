@@ -69,9 +69,17 @@ jobs:
         working-directory: ./builder/
         run: nix build
 
+      - name: Checking disk space
+        run: |
+          df -h
+
       - name: Clean nix store
         run: nix-collect-garbage -d
         
+       - name: Checking disk space
+        run: |
+          df -h       
+
       - name: Load Docker image
         working-directory: ./builder/
         run: docker load < result
