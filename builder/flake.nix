@@ -88,7 +88,7 @@
       pwn-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "pwn-tools";
-          paths = [ gdb gef nasm ropgadget python312Packages.ropper pwntools cutter rocmPackages.llvm.clang binwalk checksec ];
+          paths = [ gdb gef nasm ropgadget python312Packages.ropper pwntools binutils cutter rocmPackages.llvm.clang binwalk checksec ];
         })
       ];
       nix-pentest = pkgs.dockerTools.buildLayeredImage {
