@@ -14,6 +14,9 @@ function setup_channels {
     nix-channel --update
     nix-shell '<home-manager>' -A install
 
+    # Switch login shell to zsh
+    sed -i 's@/root:/bin/sh@/root:/root/.nix-profile/bin/zsh@g' /etc/passwd
+
     # create the userPrefs directory for burp
     mkdir -p /root/.java/.userPrefs/
     

@@ -52,7 +52,7 @@
       cloud-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "cloud-tools";
-          paths = [ awscli2 azure-cli kubectl ];
+          paths = [ awscli2 azure-cli kubectl k9s];
         })
       ];
       android = with pkgs; [
@@ -114,6 +114,7 @@
           generic-tools
           web-tools
           cloud-tools
+	  pwn-tools
           shadow
           extraLayer
         ];
