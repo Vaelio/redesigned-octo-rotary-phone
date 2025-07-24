@@ -76,7 +76,7 @@ jobs:
       - name: Clean nix store
         run: nix-collect-garbage -d
         
-       - name: Checking disk space
+      - name: Checking disk space
         run: |
           df -h       
 
