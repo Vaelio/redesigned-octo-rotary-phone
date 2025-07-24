@@ -82,7 +82,7 @@
       network-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "network-tools";
-          paths = [ nmap proxychains-ng netcat socat simple-http-server wireshark openssh proxmark3 rdesktop rsync tcpdump tshark traceroute wifite2 aircrack-ng chisel tigervnc ];
+          paths = [ nmap proxychains-ng netcat-gnu socat simple-http-server wireshark openssh proxmark3 rdesktop rsync tcpdump tshark traceroute wifite2 aircrack-ng chisel tigervnc ];
         })
       ];
       pwn-tools = with pkgs; [
