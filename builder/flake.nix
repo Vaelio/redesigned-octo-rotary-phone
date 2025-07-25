@@ -34,7 +34,7 @@
       linux-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "linux-tools";
-          paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils procps nix cacert su python312Packages.ipython unixtools.script less iproute2 unixtools.netstat bottom htop gnugrep gawkInteractive gnused ncurses unixtools.xxd cachix ];
+          paths = [ coreutils-full lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils procps nix cacert su python312Packages.ipython unixtools.script less iproute2 unixtools.netstat bottom htop gnugrep gawkInteractive gnused ncurses unixtools.xxd cachix nix-search-cli];
         })
       ];
       web-tools = with pkgs; [
@@ -82,7 +82,7 @@
       network-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "network-tools";
-          paths = [ nmap proxychains-ng netcat-gnu socat simple-http-server wireshark openssh proxmark3 rdesktop rsync tcpdump tshark traceroute wifite2 aircrack-ng chisel tigervnc ];
+          paths = [ nmap proxychains-ng netcat-gnu socat simple-http-server wireshark openssh proxmark3 rdesktop rsync tcpdump tshark traceroute wifite2 aircrack-ng chisel tigervnc openvpn];
         })
       ];
       pwn-tools = with pkgs; [
