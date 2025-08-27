@@ -35,6 +35,7 @@
             -e DISPLAY=:0 \
             -e _JAVA_AWT_WM_NONREPARENTING=1 \
             -e QT_X11_NO_MITSHM=1 \
+            -e LC_ALL=en_US.UTF-8 \
             -e ZSH_THEME=gentoo \
             --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
             --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
@@ -82,6 +83,7 @@
             -e _JAVA_AWT_WM_NONREPARENTING=1 \
             -e QT_X11_NO_MITSHM=1 \
             -e ZSH_THEME=gentoo \
+            -e LC_ALL=en_US.UTF-8 \
             --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
             --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
             --mount type=bind,src=./workspace,dst=/workspace \
