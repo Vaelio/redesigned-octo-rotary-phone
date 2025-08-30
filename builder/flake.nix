@@ -76,7 +76,7 @@
       ad-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "ad-tools";
-          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python312Packages.certipy ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp smbmap enum4linux enum4linux-ng pylaps python312Packages.pypykatz krbjack libmspack polenum coercer donpapi certsync keepwn pre2k python312Packages.masky python312Packages.pywerview autobloody python312Packages.dploot amass bettercap cewl eyewitness gowitness ruler ];
+          paths = [ netexec smbclient-ng samdump2 nbtscan openldap pretender onesixtyone sccmhunter krb5 responder mitm6 python312Packages.impacket python312Packages.lsassy bloodhound bloodhound-py neo4j python312Packages.ldapdomaindump python312Packages.certipy-ad ldeep manspider asrepcatcher legba mariadb masscan metasploit mitmproxy netdiscover exploitdb sshuttle swaks freerdp smbmap enum4linux enum4linux-ng pylaps python312Packages.pypykatz krbjack libmspack polenum coercer donpapi certsync keepwn pre2k python312Packages.masky python312Packages.pywerview autobloody python312Packages.dploot amass bettercap cewl eyewitness gowitness ruler ];
         })
       ];
       network-tools = with pkgs; [
