@@ -34,7 +34,7 @@
       linux-tools = with pkgs; [
         (pkgs.symlinkJoin {
           name = "linux-tools";
-          paths = [ dig dnsutils iputils inetutils coreutils-full gnutar unp gosu lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils procps nix cacert su python312Packages.ipython unixtools.script less iproute2 unixtools.netstat bottom htop gnugrep gawkInteractive gnused ncurses unixtools.xxd cachix nix-search-cli];
+          paths = [ pdfpc dig dnsutils iputils inetutils coreutils-full gnutar unp gosu lsd zsh bash oh-my-zsh fzf zellij curl wget nano vim git iconv tmux zsh-z zsh-autosuggestions zsh-completions zsh-syntax-highlighting python312 findutils procps nix cacert su python312Packages.ipython unixtools.script less iproute2 unixtools.netstat bottom htop gnugrep gawkInteractive gnused ncurses unixtools.xxd cachix nix-search-cli];
         })
       ];
       web-tools = with pkgs; [
