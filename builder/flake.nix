@@ -84,37 +84,31 @@
           paths = [ gdb gef nasm ropgadget python312Packages.ropper pwntools binutils cutter rocmPackages.llvm.clang binwalk checksec ];
         })
       ];
+      extraLibs = with pkgs; [
+        zlib
+        zstd
+        stdenv.cc.cc  # includes the libstdc++ runtime
+        curl
+        openssl
+        attr
+        libssh
+        bzip2
+        libxml2
+        acl
+        libsodium
+        util-linux
+        xz
+        systemd
+      
+        # Steam hack: expose lib64 from steam-run’s FHS env
+        (pkgs.runCommand "steamrun-lib" {} ''
+          mkdir -p $out
+          ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib
+        '')
+      ];
       nix-pentest = pkgs.dockerTools.buildLayeredImage {
         name = "nix-pentest-ctr";
         tag = "latest";
-        config = {
-          Cmd = [ "${pkgs.zsh}/bin/zsh" ]; # Runs bash interactively
-          User = "root";
-          WorkingDir = "/workspace";
-          Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root" "NIXPKGS_ALLOW_UNFREE=1" "NIX_LD=${pkgs.nix-ld}/bin/ld.so" "NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath extraLibs}" ];
-        };
-	extraLibs = with pkgs; [
-          zlib
-          zstd
-          stdenv.cc.cc  # includes the libstdc++ runtime
-          curl
-          openssl
-          attr
-          libssh
-          bzip2
-          libxml2
-          acl
-          libsodium
-          util-linux
-          xz
-          systemd
-
-          # Steam hack: expose lib64 from steam-run’s FHS env
-          (pkgs.runCommand "steamrun-lib" {} ''
-            mkdir -p $out
-            ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib
-          '')
-        ];
         contents = with pkgs; [
           ./fs
           android
@@ -135,8 +129,14 @@
         extraCommands = ''
           	        mkdir -p ./tmp
 			mkdir -p ./lib
-			ln -s ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 $out/lib/ld-linux-x86-64.so.2
+			#ln -s ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 ./lib/ld-linux-x86-64.so.2
           	      '';
+        config = {
+          Cmd = [ "${pkgs.zsh}/bin/zsh" ]; # Runs bash interactively
+          User = "root";
+          WorkingDir = "/workspace";
+          Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root" "NIXPKGS_ALLOW_UNFREE=1" "NIX_LD=${pkgs.nix-ld}/bin/ld.so" "NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath extraLibs}" ];
+        };
       };
     in
     {
