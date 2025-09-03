@@ -17,13 +17,6 @@
         inherit system;
         config.allowUnfree = true;
       };
-      #kaliImage = pkgs.dockerTools.pullImage {
-      #  imageName = "kalilinux/kali-rolling";
-      #  imageDigest = "sha256:c21cb4b884932cf7dcc732efb20b88ea650475591c55c17d51af4bcd45859b18";
-      #  finalImageName = "kali";
-      #  finalImageTag = "latest";
-      #  hash = "sha256-2u7LK434S/INRe5zApAkHmQTKqcxYZkVXTEGGonzmo4=";
-      #};
       useExtra = builtins.getEnv "IMPORT_FMD" == "1";
       extraLayer = with pkgs; [
         (pkgs.symlinkJoin {
@@ -94,15 +87,34 @@
       nix-pentest = pkgs.dockerTools.buildLayeredImage {
         name = "nix-pentest-ctr";
         tag = "latest";
-        #fromImage = kaliImage;
-        #fromImageName = null;
-        #fromImageTag = "latest";
         config = {
-          Cmd = [ "${pkgs.bash}/bin/bash" ]; # Runs bash interactively
+          Cmd = [ "${pkgs.zsh}/bin/zsh" ]; # Runs bash interactively
           User = "root";
           WorkingDir = "/workspace";
-          Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root" "NIXPKGS_ALLOW_UNFREE=1" ];
+          Env = [ "HOME=/root" "ZSH_THEME=gentoo" "USER=root" "NIXPKGS_ALLOW_UNFREE=1" "NIX_LD=${pkgs.nix-ld}/bin/ld.so" "NIX_LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath extraLibs}" ];
         };
+	extraLibs = with pkgs; [
+          zlib
+          zstd
+          stdenv.cc.cc  # includes the libstdc++ runtime
+          curl
+          openssl
+          attr
+          libssh
+          bzip2
+          libxml2
+          acl
+          libsodium
+          util-linux
+          xz
+          systemd
+
+          # Steam hack: expose lib64 from steam-run’s FHS env
+          (pkgs.runCommand "steamrun-lib" {} ''
+            mkdir -p $out
+            ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib
+          '')
+        ];
         contents = with pkgs; [
           ./fs
           android
@@ -122,6 +134,8 @@
         created = "now";
         extraCommands = ''
           	        mkdir -p ./tmp
+			mkdir -p ./lib
+			ln -s ${pkgs.glibc}/lib/ld-linux-x86-64.so.2 $out/lib/ld-linux-x86-64.so.2
           	      '';
       };
     in
