@@ -37,6 +37,11 @@
             -e QT_X11_NO_MITSHM=1 \
             -e LC_ALL=en_US.UTF-8 \
             -e ZSH_THEME=gentoo \
+            -e WAYLAND_DISPLAY= $WAYLAND_DISPLAY \
+            -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+            -e DBUS_SESSION_BUS_ADDRESS = $DBUS_SESSION_BUS_ADDRESS \
+            --mount type=bind,src=/run/user/$UID,dst=/run/user/$UID \
+            --mount type=bind,src=/etc/machine-id:/etc/machine-id:ro \
             --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
             --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
             --mount type=bind,src=./workspace,dst=/workspace \
@@ -84,6 +89,11 @@
             -e QT_X11_NO_MITSHM=1 \
             -e ZSH_THEME=gentoo \
             -e LC_ALL=en_US.UTF-8 \
+            -e WAYLAND_DISPLAY= $WAYLAND_DISPLAY \
+            -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+            -e DBUS_SESSION_BUS_ADDRESS = $DBUS_SESSION_BUS_ADDRESS \
+            --mount type=bind,src=/run/user/$UID,dst=/run/user/$UID \
+            --mount type=bind,src=/etc/machine-id:/etc/machine-id:ro \
             --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
             --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
             --mount type=bind,src=./workspace,dst=/workspace \
