@@ -41,7 +41,7 @@
             -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
             -e DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS \
             --mount type=bind,src=/run/user/$UID,dst=/run/user/$UID \
-            --mount type=bind,src=/etc/machine-id:/etc/machine-id,readonly=true \
+            --mount type=bind,src=/etc/machine-id,dst=/etc/machine-id,readonly=true \
             --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
             --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
             --mount type=bind,src=./workspace,dst=/workspace \
@@ -93,7 +93,7 @@
             -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
             -e DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS \
             --mount type=bind,src=/run/user/$UID,dst=/run/user/$UID \
-            --mount type=bind,src=/etc/machine-id:/etc/machine-id,readonly=true \
+            --mount type=bind,src=/etc/machine-id,dst=/etc/machine-id,readonly=true \
             --mount type=bind,src=/tmp/.X11-unix,dst=/tmp/.X11-unix \
             --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=true \
             --mount type=bind,src=./workspace,dst=/workspace \
